@@ -30,7 +30,7 @@ class PosesViewModel: ObservableObject {
             PoseCategory(
                 title: "Close-up",
                 imageName: "Close_up",
-                gallery: (1...8).map { "Portrait_\($0)" }
+                gallery: (1...8).map { "portrait_\($0)" }
             )
         ]
     }
