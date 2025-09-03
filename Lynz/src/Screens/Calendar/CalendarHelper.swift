@@ -14,9 +14,9 @@ struct CalendarHelper {
         let offset = calendar.component(.weekday, from: startOfMonth) - 1
 
         // Предыдущие даты для заполнения
-        let leadingDays = (1...offset).compactMap {
+        let leadingDays = offset > 0 ? (1...offset).compactMap {
             calendar.date(byAdding: .day, value: -$0, to: startOfMonth)
-        }.reversed()
+        }.reversed() : []
 
         // Текущий месяц
         let currentDays = (0..<daysCount).compactMap {
@@ -26,9 +26,9 @@ struct CalendarHelper {
         // Следующие даты для добивки
         let total = leadingDays.count + currentDays.count
         let trailingCount = (7 - (total % 7)) % 7
-        let trailingDays = (1...trailingCount).compactMap {
+        let trailingDays = trailingCount > 0 ? (1...trailingCount).compactMap {
             calendar.date(byAdding: .day, value: daysCount + $0 - 1, to: startOfMonth)
-        }
+        } : []
 
         return Array(leadingDays) + currentDays + trailingDays
     }
